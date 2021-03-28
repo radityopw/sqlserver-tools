@@ -1,0 +1,1 @@
+java -cp .;lib/* sqlserver_tools.BackupFull
