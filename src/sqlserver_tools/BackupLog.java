@@ -33,10 +33,10 @@ public class BackupLog{
 			LOGGER.log(Level.INFO,prop.toString());
 			//System.out.println(prop);
 			
-			connectionUrl = "jdbc:sqlserver://"+prop.getProperty("database.host")+":"+prop.getProperty("database.port")+";"
-                        + "database="+prop.getProperty("database.name")+";"
-                        + "user="+prop.getProperty("database.user")+";"
-                        + "password="+prop.getProperty("database.pass")+";"
+			connectionUrl = "jdbc:sqlserver://"+prop.getProperty("backup.database.host")+":"+prop.getProperty("backup.database.port")+";"
+                        + "database="+prop.getProperty("backup.database.name")+";"
+                        + "user="+prop.getProperty("backup.database.user")+";"
+                        + "password="+prop.getProperty("backup.database.pass")+";"
                         + "loginTimeout=30;";
 			LOGGER.log(Level.INFO,connectionUrl);
 						
@@ -48,9 +48,9 @@ public class BackupLog{
 				Files.createDirectories(path);
 			}catch(Exception e){}
 			
-			backupFile = new File(prop.getProperty("backup.log.folder")+File.separator+prop.getProperty("database.name")+"_"+System.currentTimeMillis()+".trn");
+			backupFile = new File(prop.getProperty("backup.log.folder")+File.separator+prop.getProperty("backup.database.name")+"_"+System.currentTimeMillis()+".trn");
 			
-			backupCommand = "BACKUP LOG ["+prop.getProperty("database.name")+"] TO  DISK = N'"+backupFile.getAbsolutePath()+"' WITH NOFORMAT, INIT, SKIP, REWIND, NOUNLOAD,  STATS = 10";
+			backupCommand = "BACKUP LOG ["+prop.getProperty("backup.database.name")+"] TO  DISK = N'"+backupFile.getAbsolutePath()+"' WITH NOFORMAT, INIT, SKIP, REWIND, NOUNLOAD,  STATS = 10";
 			
 			LOGGER.log(Level.INFO,backupCommand);
 			
