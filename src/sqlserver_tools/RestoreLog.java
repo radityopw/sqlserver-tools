@@ -82,7 +82,7 @@ public class RestoreLog{
             
             stmtInsertDataWitness = connectionWitness.prepareStatement(sql);
             
-            sql = "SELECT * FROM log_backup_restore WHERE status=? AND db_target=? ORDER BY backup_start_date";
+            sql = "SELECT * FROM log_backup_restore WHERE (status=? OR status=?) AND db_target=? ORDER BY backup_start_date";
             
             stmtCekAntrianWitness = connectionWitness.prepareStatement(sql);
 			
@@ -134,13 +134,14 @@ public class RestoreLog{
             
             /*
             
-            memproses yang masih antri
+            memproses yang masih antri atau error
             
             */
             
             
             stmtCekAntrianWitness.setString(1,"antri");
-            stmtCekAntrianWitness.setString(2,prop.getProperty("restore.db.target.name"));
+            stmtCekAntrianWitness.setString(2,"error");
+            stmtCekAntrianWitness.setString(3,prop.getProperty("restore.db.target.name"));
             
             ResultSet rsWitnessCekAntri = stmtCekAntrianWitness.executeQuery();
             
