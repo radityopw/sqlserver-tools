@@ -20,7 +20,7 @@ public class RestoreLog{
 		LOGGER.addHandler(handler);
 				
 		Properties prop = new Properties();
-		String fileName = "app.config";
+		String fileName = "restore.config";
         String sql = null;
 		InputStream is = null;
 		String connectionUrlSource = null;
